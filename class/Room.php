@@ -1,16 +1,11 @@
 <?php
-$rooms = [
-    new Room("Single", 101, 100, true),
-    new Room("Double", 102, 150, true),
-    new Room("Suite", 103, 200, false),
-    new Room("Deluxe", 104, 250, true)];
-
 // Clase Room para manejar las habitaciones del hotel
 class Room{
-    private $RoomType;
-    private $RoomNum;
-    private $Price;
-    private $Availability;
+    private $id;
+    private $roomType;
+    private $roomNum;
+    private $price;
+    private $availability;
 //constructor
     function __construct($RoomType, $RoomNum, $Price, $Availability) { //tengo el construct para poder modificar y agregar a la classqu
         $this->RoomType = $RoomType;

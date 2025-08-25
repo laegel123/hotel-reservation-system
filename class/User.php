@@ -1,7 +1,6 @@
 <?php
 
-class User {
-    private $sq;
+class User extends Common {
     private $name;
     private $email;
     private $password;
@@ -9,7 +8,6 @@ class User {
     private $role;
 
     private $lastLoginDate;
-    private $createdDate;
 
     public function __construct($name, $email, $password, $role) {
         $this->name = $name;
@@ -19,7 +17,6 @@ class User {
     }
 
 
-    // Getters
     public function getName() {
         return $this->name;
     }
@@ -36,14 +33,6 @@ class User {
         return $this->role;
     }
 
-    public function getCreatedDate() {
-        return $this->createdDate;
-    }
-
-
-
-
-    // Setters
     public function setName($name) {
         $this->name = $name;
     }
@@ -60,9 +49,29 @@ class User {
         $this->role = $role;
     }
 
-    public function setCreatedDate($createdDate) {
-        $this->createdDate = $createdDate;
+    public function getDelYn()
+    {
+        return $this->delYn;
     }
+
+    public function setDelYn($delYn): void
+    {
+        $this->delYn = $delYn;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function setPassword($password): void
+    {
+        $this->password = $password;
+    }
+
+
+
+
 
 
 
