@@ -37,4 +37,10 @@ final class UserRepository
         $sql = 'DELETE FROM user WHERE email = ?';
         return $this->db->execute($sql, [$email]);
     }
+
+    public function updateLoginDate(string $email)
+    {
+        $sql = 'UPDATE user SET last_login_date = NOW() WHERE email = ?';
+        return $this->db->execute($sql, [$email]);
+    }
 }

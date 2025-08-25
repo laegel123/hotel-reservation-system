@@ -1,19 +1,23 @@
-<?php
-// Clase Room para manejar las habitaciones del hotel
+<?php declare(strict_types=1);
+
+namespace domain;
+
+require_once './domain/Common.php';
+
+use Common;
+
 class Room extends Common{
-    private $id;
+    private $room_num;
     private $type;
-    private $roomNum;
     private $description;
     private $capacity;
     private $price;
     private $image;
     private $available_yn;
 //constructor
-    function __construct($id, $type, $roomNum, $description, $capacity, $price, $image, $available_yn) { //tengo el construct para poder modificar y agregar a la classqu
-        $this->id = $id;
+    function __construct($room_num, $type, $description, $capacity, $price, $image, $available_yn) { //tengo el construct para poder modificar y agregar a la classqu
+        $this->room_num = $room_num;
         $this->type = $type;
-        $this->roomNum = $roomNum;
         $this->description = $description;
         $this->capacity = $capacity;
         $this->price = $price;
@@ -26,7 +30,7 @@ class Room extends Common{
     }
 
     public function getRoomNum(){
-        return $this->roomNum;
+        return $this->room_num;
     }
 
     public function getPrice(){
@@ -61,8 +65,8 @@ class Room extends Common{
     public function setType($type){
         $this->type = $type;
     } //para modificar el tipo de habitación
-    public function setRoomNum($roomNum){
-        $this->roomNum = $roomNum;
+    public function setRoomNum($room_num){
+        $this->room_num = $room_num;
     } //para modificar el número de habitación
 
     public function setPrice($price){
@@ -87,20 +91,5 @@ class Room extends Common{
     {
         $this->image = $image;
     }
-
-
-
-
-
-
-    public function getId()
-    {
-        return $this->id;
-    } //para modificar la disponibilidad
-
-
-
-
-
 
 }

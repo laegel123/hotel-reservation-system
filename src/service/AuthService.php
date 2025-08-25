@@ -28,6 +28,7 @@ final class AuthService
             throw new \Exception('Invalid email or password');
         }
 
+        $this->userRepository->updateLoginDate($email);
         return $user;
     }
 }

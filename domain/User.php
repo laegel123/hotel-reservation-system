@@ -1,8 +1,14 @@
-<?php
+<?php declare(strict_types=1);
+
+namespace domain;
+
+require_once './domain/Common.php';
+
+use Common;
 
 class User extends Common {
-    private $name;
     private $email;
+    private $name;
     private $password;
     private $delYn;
     private $role;
@@ -69,16 +75,4 @@ class User extends Common {
         $this->password = $password;
     }
 
-
-
-
-
-
-
-
-
-    // Method to validate password
-    public function validatePassword($password) {
-        return $this->password === $password;
-    }
 }

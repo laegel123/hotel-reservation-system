@@ -13,10 +13,10 @@ final class RoomRepository
         $this->db = Database::get();
     }
 
-    public function selectRoomByID($roomID)
+    public function selectRoomByNum($room_num)
     {
-        $sql = 'SELECT * FROM room WHERE id = ?';
-        return $this->db->fetch($sql, [$roomID]);
+        $sql = 'SELECT * FROM room WHERE room_num = ?';
+        return $this->db->fetch($sql, [$room_num]);
     }
 
     public function selectRooms()
@@ -27,26 +27,36 @@ final class RoomRepository
 
     public function insertRoom($room)
     {
-        $sql = 'INSERT INTO room (type, roomNum, description, price, capacity, image, available_yn) VALUES (?, ?, ?, ?, ?, ?, ?)';
-        $this->db->execute($sql, $room);
+        $sql = 'INSERT INTO room (room_num, type, description, price, capacity, image, available_yn) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        $this->db->execute($sql, [
+            $room->getRoomNum(),
+            $room->getType(),
+            $room->getDescription(),
+            $room->getPrice(),
+            $room->getCapacity(),
+            $room->getImage(),
+            $room->getAvailableYn(),
+        ]);
     }
 
     public function updateRoom($room)
     {
-        $sql = 'UPDATE room SET type = ?, roomNum = ?, description = ?, price = ?, capacity = ?, image = ?, available_yn = ? WHERE id = ?';
-        $this->db->execute($sql, $room);
+        $sql = 'UPDATE room SET type = ?, description = ?, price = ?, capacity = ?, image = ?, available_yn = ? WHERE room_num = ?';
+        $this->db->execute($sql, [
+            $room->getType(),
+            $room->getDescription(),
+            $room->getPrice(),
+            $room->getCapacity(),
+            $room->getImage(),
+            $room->getAvailableYn(),
+            $room->getRoomNum(),
+        ]);
     }
 
-    public function updateRoomAvailability($roomID, $available_yn)
+    public function deleteRoom($room_num)
     {
-        $sql = 'UPDATE room SET available_yn = ? WHERE id = ?';
-        $this->db->execute($sql, [$available_yn, $roomID]);
-    }
-
-    public function deleteRoom($roomID)
-    {
-        $sql = 'DELETE FROM room WHERE id = ?';
-        $this->db->execute($sql, [$roomID]);
+        $sql = 'DELETE FROM room WHERE room_num = ?';
+        $this->db->execute($sql, [$room_num]);
     }
 
 

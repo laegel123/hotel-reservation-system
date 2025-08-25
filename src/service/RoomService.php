@@ -5,8 +5,9 @@ namespace src\service;
 require_once './src/repository/RoomRepository.php';
 
 use src\repository\RoomRepository;
+use domain\Room;
 
-class RoomService
+final class RoomService
 {
     private RoomRepository $roomRepository;
 
@@ -16,9 +17,9 @@ class RoomService
     }
 
     // select room by ID
-    public function getRoom($roomID)
+    public function getRoomByNum($room_num)
     {
-        return $this->roomRepository->selectRoomByID($roomID);
+        return $this->roomRepository->selectRoomByNum($room_num);
     }
 
     // select all rooms
@@ -28,27 +29,27 @@ class RoomService
     }
 
     // insert room
-    public function insertRoom($room)
+    public function insertRoom(Room $room)
     {
-        return $this->roomRepository->insertRoom($room);
+        $this->roomRepository->insertRoom($room);
     }
 
     // update room
-    public function updateRoom($room)
+    public function updateRoom(Room $room)
     {
-        return $this->roomRepository->updateRoom($room);
+        $this->roomRepository->updateRoom($room);
     }
 
     // delete room
-    public function deleteRoom($roomID)
+    public function deleteRoom($room_num)
     {
-        return $this->roomRepository->deleteRoom($roomID);
+        $this->roomRepository->deleteRoom($room_num);
     }
 
     // update room availability
-    public function updateRoomAvailability($roomID, $availableYN)
+    public function updateRoomAvailability($room_num, $availableYN)
     {
-        return $this->roomRepository->updateRoomAvailability($roomID, $availableYN);
+        $this->roomRepository->updateRoomAvailability($room_num, $availableYN);
     }
 
 }
