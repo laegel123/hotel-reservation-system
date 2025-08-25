@@ -2,6 +2,8 @@
 
 namespace src\service;
 
+require_once './src/repository/UserRepository.php';
+
 use src\repository\UserRepository;
 
 final class AuthService
@@ -13,19 +15,19 @@ final class AuthService
         $this->userRepository = $userRepository ?? new UserRepository();
     }
 
-    // register
-    public function register(string $name, string $email, string $password, string $role)
-    {
-        $this->userRepository->insertUser($name, $email, $password, $role);
-    }
-
     // login
     public function login(string $email, string $password)
     {
-        $user = $this->userRepository->selectUserByEmailAndPw($email, $password);
+        $user = $this->userRepository->selectUserByEmail($email);
         if ($user === null) {
             throw new \Exception('Invalid email or password');
         }
+
+        // password mismatch
+        if (!password_verify($password, $user['password'])) {
+            throw new \Exception('Invalid email or password');
+        }
+
         return $user;
     }
 }

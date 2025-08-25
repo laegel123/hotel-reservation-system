@@ -1,7 +1,8 @@
 <?php
 
 namespace src\controller;
-require_once '../http/Http.php';
+require_once './http/Http.php';
+require_once './src/service/AuthService.php';
 
 use http\HttpRequest;
 use http\HttpResponse;
@@ -48,7 +49,7 @@ final class AuthController
                 'email' => $user['email'],
                 'role' => $user['role'],
             ];
-            $res->json(200, ["success" => true, "user" => $user]);
+            $res->json(200, ["success" => true, "user" => $user['email']]);
         }
     }
 

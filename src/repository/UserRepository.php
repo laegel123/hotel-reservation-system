@@ -13,17 +13,13 @@ final class UserRepository
         $this->db = Database::get();
     }
 
-    public function selectUserByEmailAndPw(string $email, string $pw)
+    public function selectUserByEmail(string $email)
     {
-        $user = $this->db->fetch('SELECT * FROM user WHERE email = :email', ['email' => $email]);
+        $sql = 'SELECT email, password, name, role FROM user WHERE email = ? LIMIT 1';
+        $user = $this->db->fetch($sql, [$email]);
 
         // no user
         if (!$user) {
-            return null;
-        }
-
-        // password mismatch
-        if (!password_verify($pw, $user['password'])) {
             return null;
         }
 
@@ -32,6 +28,13 @@ final class UserRepository
 
     public function insertUser(string $email, string $pw, string $name, string $role)
     {
-        return $this->db->execute('INSERT INTO user (email, password, name, role) VALUES (:email, :pw, :name, :role)', ['email' => $email, 'pw' => $pw, 'name' => $name, 'role' => $role]);
+        $sql  = 'INSERT INTO user (email, password, name, role) VALUES (?, ?, ?, ?)';
+        return $this->db->execute($sql, [$email, $pw, $name, $role]);
+    }
+
+    public function deleteUser(string $email)
+    {
+        $sql = 'DELETE FROM user WHERE email = ?';
+        return $this->db->execute($sql, [$email]);
     }
 }

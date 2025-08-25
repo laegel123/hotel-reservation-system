@@ -1,71 +1,59 @@
 <?php
 // Clase Room para manejar las habitaciones del hotel
-class Room{
+class Room extends Common{
     private $id;
-    private $roomType;
+    private $type;
     private $roomNum;
     private $price;
-    private $availability;
+    private $available_yn;
 //constructor
-    function __construct($RoomType, $RoomNum, $Price, $Availability) { //tengo el construct para poder modificar y agregar a la classqu
-        $this->RoomType = $RoomType;
-        $this->RoomNum = $RoomNum;
-        $this->Price = $Price;
-        $this->Availability = $Availability;
+    function __construct($id, $type, $roomNum, $price, $available_yn) { //tengo el construct para poder modificar y agregar a la classqu
+        $this->id = $id;
+        $this->type = $type;
+        $this->roomNum = $roomNum;
+        $this->price = $price;
+        $this->available_yn = $available_yn;
     }
     //Ocupo los getters para poder acceder a los atributos privados de arriba
-    public function getRoomType(){
-        return $this->RoomType;
+    public function getType(){
+        return $this->type;
     }
 
     public function getRoomNum(){
-        return $this->RoomNum;
+        return $this->roomNum;
     }
 
     public function getPrice(){
-        return $this->Price;
+        return $this->price;
     }
 
-    public function getAvailability(){
-        return $this->Availability;
+    public function getAvailableYn(){
+        return $this->available_yn;
     }
 //Setters
-    public function setRoomType($roomType){
-        $this->RoomType = $roomType;
+    public function setType($type){
+        $this->type = $type;
     } //para modificar el tipo de habitación
     public function setRoomNum($roomNum){
-        $this->RoomNum = $roomNum;
+        $this->roomNum = $roomNum;
     } //para modificar el número de habitación
 
     public function setPrice($price){
-        $this->Price = $price;
+        $this->price = $price;
     } //para modificar el precio
 
-    public function setAvailability($availability){
-        $this->Availability = $availability;
+    public function setAvailableYn($available_yn){
+        $this->available_yn = $available_yn;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     } //para modificar la disponibilidad
 
-    //Funcion para checar Availability
-    public function ava(){
-        if($this->Availability > 0){ //si es mas de cero significa que si esta disponible
-            $this->Availability--;
-            return true; //arroja true
-        }
-        return false; //else arroja false y no hay disponibles
-    }
 
-    // Función para reservar habitación
-    public function reserveRoom() {
-        // Verificar si la habitación está disponible
-        if ($this->Availability) {
-            $this->Availability = false;
-            return true; // Si la reserva fue exitosa la cambia la availability a false
-        }
-        return false; // Ya está ocupada
-    }
-    public function checkOut() { //funcion para hacer el checkout 
-        $this->Availability = true;
-        return true;
-    }
+
+
+
 
 }
