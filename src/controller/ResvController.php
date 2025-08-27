@@ -10,6 +10,7 @@ use http\HttpRequest;
 use http\HttpResponse;
 use src\service\ReservService;
 use domain\Reservation;
+use function http\json_input;
 
 final class ResvController
 {
@@ -24,16 +25,10 @@ final class ResvController
         $this->reservService = $reservService ?? new ReservService();
     }
 
-    private function json_input(): HttpRequest
-    {
-        return new HttpRequest(file_get_contents('php://input'));
-    }
-
-
     // get reserv by email
     public function getReservByEmail()
     {
-        $req = $this->json_input();
+        $req = json_input();
         $res = new HttpResponse();
 
         if ($_SESSION['user'] == null) {
@@ -56,7 +51,7 @@ final class ResvController
     // get reserv by room num
     public function getReservByRoomNum()
     {
-        $req = $this->json_input();
+        $req = json_input();
         $res = new HttpResponse();
 
         if ($_SESSION['user'] == null || $_SESSION['user']['role'] != 'admin') {
@@ -74,7 +69,7 @@ final class ResvController
     // create reserv
     public function createReserv()
     {
-        $req = $this->json_input();
+        $req = json_input();
         $res = new HttpResponse();
 
         if ($_SESSION['user'] == null) {
@@ -109,7 +104,7 @@ final class ResvController
     // update reserv
     public function updateReserv()
     {
-        $req = $this->json_input();
+        $req = json_input();
         $res = new HttpResponse();
 
         if ($_SESSION['user'] == null) {
@@ -137,7 +132,7 @@ final class ResvController
     // cancel reserv
     public function cancelReserv()
     {
-        $req = $this->json_input();
+        $req = json_input();
         $res = new HttpResponse();
 
         if ($_SESSION['user'] == null) {

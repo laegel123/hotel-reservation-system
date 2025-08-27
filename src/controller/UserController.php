@@ -7,6 +7,7 @@ require_once './src/service/UserService.php';
 use http\HttpRequest;
 use http\HttpResponse;
 use src\service\UserService;
+use function http\json_input;
 
 final class UserController
 {
@@ -22,14 +23,9 @@ final class UserController
         $this->userService = $userService ?? new UserService();
     }
 
-    private function json_input(): HttpRequest
-    {
-        return new HttpRequest(file_get_contents('php://input'));
-    }
-
     function registerUser(): void
     {
-        $req = $this->json_input();
+        $req = json_input();
         $res = new HttpResponse();
 
         $name = $req->json('name', '');
@@ -47,7 +43,7 @@ final class UserController
 
     function deleteUser(): void
     {
-        $req = $this->json_input();
+        $req = json_input();
         $res = new HttpResponse();
 
         $email = $req->json('email', '');

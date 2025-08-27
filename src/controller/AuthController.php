@@ -7,6 +7,7 @@ require_once './src/service/AuthService.php';
 use http\HttpRequest;
 use http\HttpResponse;
 use src\service\AuthService;
+use function http\json_input;
 
 final class AuthController
 {
@@ -21,16 +22,11 @@ final class AuthController
         $this->authService = $authService ?? new AuthService();
     }
 
-    private function json_input(): HttpRequest
-    {
-        return new HttpRequest(file_get_contents('php://input'));
-    }
-
 
     // login
     function login(): void
     {
-        $req = $this->json_input();
+        $req = json_input();
         $res = new HttpResponse();
 
         $email = $req->json('email', '');

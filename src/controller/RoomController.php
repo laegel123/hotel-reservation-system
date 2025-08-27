@@ -10,6 +10,7 @@ use http\HttpRequest;
 use http\HttpResponse;
 use src\service\RoomService;
 use domain\Room;
+use function http\json_input;
 
 final class RoomController
 {
@@ -24,11 +25,6 @@ final class RoomController
         $this->roomService = $roomService ?? new RoomService();
     }
 
-    private function json_input(): HttpRequest
-    {
-        return new HttpRequest(file_get_contents('php://input'));
-    }
-
     // get rooms
     public function getRooms()
     {
@@ -40,7 +36,7 @@ final class RoomController
     public function getRoom()
     {
         $res = new HttpResponse();
-        $req = $this->json_input();
+        $req = json_input();
 
         $id = $req->json('room_num', '');
 
@@ -151,7 +147,7 @@ final class RoomController
     public function deleteRoom()
     {
         $res = new HttpResponse();
-        $req = $this->json_input();
+        $req = json_input();
 
         $room_num = $req->json('room_num', '');
         if ($room_num == '') {
