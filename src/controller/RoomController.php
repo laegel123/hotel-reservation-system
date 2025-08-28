@@ -36,12 +36,22 @@ final class RoomController
     public function getRoom()
     {
         $res = new HttpResponse();
-        $req = json_input();
 
-        $id = $req->json('room_num', '');
+        $id = $_GET['room_num'] ?? null;
 
-        $rooms = $this->roomService->getRoomByNum($id);
-        $res->json(200, $rooms);
+        if ($id === null || $id === '') {
+            $res->json(400, ["success" => false, "error" => "room_num is required."]);
+            return;
+        }
+
+        $room = $this->roomService->getRoomByNum($id);
+
+        if ($room === null) {
+            $res->json(404, ["success" => false, "error" => "Room not found."]);
+            return;
+        }
+
+        $res->json(200, [$room]);
     }
 
     // create room

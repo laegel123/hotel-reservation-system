@@ -37,9 +37,9 @@ final class ReservService
     // insert reserv
     public function createReserv(Reservation $reserv)
     {
-        $reserv = $this->reservRepository->selectReservByEmailAndRoomNumber($reserv->getUserEmail(), $reserv->getRoomNum(), $reserv->getStatus());
+        $isAvailable = $this->reservRepository->selectReservByEmailAndRoomNumber($reserv->getUserEmail(), $reserv->getRoomNum(), $reserv->getStatus());
 
-        if ( $reserv != null) {
+        if ( $isAvailable != null) {
             throw new \Exception('Reservation already exists');
         }
 
