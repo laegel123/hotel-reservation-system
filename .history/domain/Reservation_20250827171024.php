@@ -44,7 +44,7 @@ class Reservation extends Common
         $oldRoom = $this->room_num;
         $this->room_num = $room_num;
         require_once __DIR__ . '/../util/audit.php';
-        insertAuditRecord($this->user_email, 'update_room', 'Room changed from ' . $oldRoom . ' to ' . $room_num);
+        generateAuditRecord($this->user_email, 'update_room', 'Room changed from ' . $oldRoom . ' to ' . $room_num);// esto agregue yo y tengo que estudiarlo
 
     }
 
@@ -54,7 +54,7 @@ class Reservation extends Common
     }
 
     public function setStatus($status): void
-    {
+    
         
     }
 
@@ -79,7 +79,7 @@ class Reservation extends Common
         $oldMemo = $this->memo;
         $this->memo = $memo;
         require_once __DIR__ . '/../util/audit.php';
-        insertAuditRecord($this->user_email, 'update_memo', 'Memo changed from "' . $oldMemo . '" to "' . $memo . '"');
+        generateAuditRecord($this->user_email, 'update_memo', 'Memo changed from "' . $oldMemo . '" to "' . $memo . '"');
     }
 
 
