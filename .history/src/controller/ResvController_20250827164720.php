@@ -77,7 +77,6 @@ final class ResvController
             return;
         }
 
-        require_once __DIR__ . '/../../util/audit.php';
         if ( $_SESSION['user']['role'] == 'admin') {
             $reserv = new Reservation(
                 0,
@@ -86,8 +85,8 @@ final class ResvController
                 $req->json('status', 'pending'),
                 $req->json('memo', '')
             );
+
             $this->reservService->createReserv($reserv);
-            \util\insertAuditRecord($req->json('user_email', ''), 'create_reservation', 'Reservation created for room ' . $req->json('room_num', ''));
             $res->json(200, ["success" => true, "message" => "Reservation created successfully."]);
         } else {
             $reserv = new Reservation(
@@ -96,8 +95,8 @@ final class ResvController
                 'pending',
                 ''
             );
+
             $this->reservService->createReserv($reserv);
-            \util\insertAuditRecord($_SESSION['user']['email'], 'create_reservation', 'Reservation created for room ' . $req->json('room_num', ''));
             $res->json(200, ["success" => true, "message" => "Reservation created successfully."]);
         }
     }

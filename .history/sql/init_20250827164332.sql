@@ -38,10 +38,11 @@ create table reservation
     constraint reservation_ibfk_2
         foreign key (room_num) references room (room_num)
 );
-CREATE TABLE audit_log (
+create table audit_log
+(
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_email VARCHAR(100) NOT NULL,
-    action VARCHAR(100) NOT NULL,
-    details VARCHAR(500) NOT NULL,
+    action VARCHAR(50) NOT NULL,
+    details TEXT,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
 );
