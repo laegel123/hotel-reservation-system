@@ -17,6 +17,11 @@ final class UserService
     // register
     public function register(string $email, string $password, string $name, string $role)
     {
+        $user = $this->userRepository->selectUserByEmail($email);
+        if ($user !== null) {
+            throw new \Exception('User already exists');
+        }
+
         // password hash
         $password = password_hash($password, PASSWORD_DEFAULT);
         $this->userRepository->insertUser($email, $password, $name, $role);

@@ -31,7 +31,7 @@ final class UserController
         $name = $req->json('name', '');
         $email = $req->json('email', '');
         $password = $req->json('password', '');
-        $role = $req->json('role', '');
+        $role = 'user';
 
         if ($name == '' || $email == '' || $password == '' || $role == '') {
             $res->json(400, ["success" => false, "error" => "Name and Email and Password, Role are required."]);
