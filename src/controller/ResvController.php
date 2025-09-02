@@ -82,7 +82,7 @@ final class ResvController
             $reserv = new Reservation(
                 0,
                 $req->json('user_email', ''),
-                $req->json('room_num', ''),
+                $req->json('room_num', 0),
                 $req->json('status', 'pending'),
                 $req->json('memo', '')
             );
@@ -91,8 +91,9 @@ final class ResvController
             $res->json(200, ["success" => true, "message" => "Reservation created successfully."]);
         } else {
             $reserv = new Reservation(
+                0,
                 $_SESSION['user']['email'],
-                $req->json('room_num', ''),
+                $req->json('room_num', 0),
                 'pending',
                 ''
             );
